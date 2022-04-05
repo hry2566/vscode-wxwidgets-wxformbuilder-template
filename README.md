@@ -1,0 +1,1 @@
+# vscode-wxwidgets-wxformbuilder-template
