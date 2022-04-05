@@ -1,0 +1,162 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Create Directory",
+            "windows": {
+                "command": "if (-not (Test-Path ./obj/debug)){mkdir ./obj/debug} if (-not (Test-Path ./obj/release)){mkdir ./obj/release} if (-not (Test-Path ./bin/debug)){mkdir ./bin/debug} if (-not (Test-Path ./bin/release)){mkdir ./bin/release}",
+            }
+        },
+        {
+            "type": "shell",
+            "label": "Resource Compile Debug",
+            "windows": {
+                "command": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin/windres.exe",
+                "args": [
+                    "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/include",
+                    "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib/mswud",
+                    "-J",
+                    "rc",
+                    "-O",
+                    "coff",
+                    "-i",
+                    "${workspaceFolder}/resource.rc",
+                    "-o",
+                    "${workspaceFolder}/obj/Debug/resource.res"
+                ]
+            },
+            "problemMatcher": [],
+            "dependsOn": [
+                "Create Directory"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "Compile Debug",
+            "windows": {
+                "command": "x86_64-w64-mingw32-g++.exe",
+                "args": [
+                    "-pipe",
+                    "-mthreads",
+                    "-D__GNUWIN32__",
+                    "-D__WXMSW__",
+                    "-DwxUSE_UNICODE",
+                    "-DWX_PRECOMP",
+                    "-Wall",
+                    "-g",
+                    "-D__WXDEBUG__",
+                    "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/include",
+                    "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib/mswud",
+                    "-c",
+                    "$(",
+                    "dir",
+                    "-Path",
+                    "${workspaceFolder}\\",
+                    "-Filter",
+                    "*.cpp",
+                    "-Recurse",
+                    "|",
+                    "%{$_.FullName}",
+                    ")"
+                ],
+            },
+            "problemMatcher": [],
+            "dependsOn": [
+                "Resource Compile Debug"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "Compile & Link Debug",
+            "windows": {
+                "command": "x86_64-w64-mingw32-g++.exe",
+                "args": [
+                    "-LC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib",
+                    "-o",
+                    "${workspaceFolder}/bin/Debug/${workspaceFolderBasename}.exe",
+                    "$(",
+                    "dir",
+                    "-Path",
+                    "${workspaceFolder}/",
+                    "-Filter",
+                    "*.o",
+                    "-Recurse",
+                    "|",
+                    "%{$_.FullName}",
+                    ")",
+                    "${workspaceFolder}/obj/Debug/resource.res",
+                    "-mthreads",
+                    "-lwxmsw31ud",
+                    "-lwxpngd",
+                    "-lwxjpegd",
+                    "-lwxtiffd",
+                    "-lwxzlibd",
+                    "-lkernel32",
+                    "-luser32",
+                    "-lgdi32",
+                    "-lwinspool",
+                    "-lcomdlg32",
+                    "-ladvapi32",
+                    "-lshell32",
+                    "-lole32",
+                    "-loleaut32",
+                    "-luuid",
+                    "-lcomctl32",
+                    "-lwsock32",
+                    "-lodbc32",
+                    "-lshlwapi",
+                    "-lversion",
+                    "-loleacc",
+                    "-luxtheme",
+                    "-mwindows"
+                ]
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "dependsOn": [
+                "MoveObjects"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "MoveObjects",
+            "windows": {
+                "command": "Move-Item",
+                "args": [
+                    "-Path",
+                    "${workspaceFolder}/*.o",
+                    "-Destination",
+                    "${workspaceFolder}/obj/Debug",
+                    "-Force"
+                ]
+            },
+            "problemMatcher": [],
+            "dependsOn": [
+                "Compile Debug"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "TEST",
+            "windows": {
+                "command": "echo",
+                "args": [
+                    "$(",
+                    "dir",
+                    "-Path",
+                    "${workspaceFolder}/",
+                    "-Filter",
+                    "*.cpp",
+                    "-Recurse",
+                    "|",
+                    "%{$_.FullName}",
+                    ")"
+                ]
+            }
+        }
+    ]
+}
