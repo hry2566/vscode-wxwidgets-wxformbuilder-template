@@ -1,6 +1,6 @@
 # vscode-wxwidgets-wxformbuilder-template  
  * VSCode + wxWidgets + wxFormBuilder のテンプレートです  
- * まだDebugのみでReleaseはありません  
+ * ~~まだDebugのみでReleaseはありません~~  
  * CMakeは使用しません  
   
 ## 開発環境  
@@ -14,6 +14,6 @@
  *「F5」または「Ctrl+F5」でBuild&Linkできる
 
 ## 予定  
- * Releaseも作成
+ * ~~Releaseも作成~~
  * 各種ディレクトリ設定やその他の設定を簡単にできるソフトの開発  
  
