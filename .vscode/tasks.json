@@ -24,8 +24,11 @@
         {
             "type": "shell",
             "label": "Resource Compile Debug",
+            "options": {
+                "cwd": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin"
+            },
             "windows": {
-                "command": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin/windres.exe",
+                "command": "./windres.exe",
                 "args": [
                     "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/include",
                     "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib/mswud",
@@ -47,8 +50,11 @@
         {
             "type": "shell",
             "label": "Compile Debug",
+            "options": {
+                "cwd": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin"
+            },
             "windows": {
-                "command": "x86_64-w64-mingw32-g++.exe",
+                "command": "./x86_64-w64-mingw32-g++.exe",
                 "args": [
                     "-pipe",
                     "-mthreads",
@@ -82,8 +88,11 @@
         {
             "type": "shell",
             "label": "Compile & Link Debug",
+            "options": {
+                "cwd": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin"
+            },
             "windows": {
-                "command": "x86_64-w64-mingw32-g++.exe",
+                "command": "./x86_64-w64-mingw32-g++.exe",
                 "args": [
                     "-LC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib",
                     "-o",
@@ -127,7 +136,7 @@
             },
             "group": {
                 "kind": "build",
-                "isDefault": true
+                // "isDefault": true
             },
             "problemMatcher": [],
             "dependsOn": [
@@ -141,7 +150,7 @@
                 "command": "Move-Item",
                 "args": [
                     "-Path",
-                    "${workspaceFolder}/*.o",
+                    "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin/*.o",
                     "-Destination",
                     "${workspaceFolder}/obj/Debug",
                     "-Force"
@@ -167,8 +176,11 @@
         {
             "type": "shell",
             "label": "Resource Compile Release",
+            "options": {
+                "cwd": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin"
+            },
             "windows": {
-                "command": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin/windres.exe",
+                "command": "./windres.exe",
                 "args": [
                     "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/include",
                     "-IC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib/mswud",
@@ -190,8 +202,11 @@
         {
             "type": "shell",
             "label": "Compile Release",
+            "options": {
+                "cwd": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin"
+            },
             "windows": {
-                "command": "x86_64-w64-mingw32-g++.exe",
+                "command": "./x86_64-w64-mingw32-g++.exe",
                 "args": [
                     "-pipe",
                     "-mthreads",
@@ -224,8 +239,11 @@
         {
             "type": "shell",
             "label": "Compile & Link Release",
+            "options": {
+                "cwd": "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin"
+            },
             "windows": {
-                "command": "x86_64-w64-mingw32-g++.exe",
+                "command": "./x86_64-w64-mingw32-g++.exe",
                 "args": [
                     "-LC:/Users/HRY/0000_APPS/CodeBlocks/Library/wxWidgets/64bit/lib/gcc_lib",
                     "-o",
@@ -270,7 +288,7 @@
             },
             "group": {
                 "kind": "build",
-                // "isDefault": true
+                "isDefault": true
             },
             "problemMatcher": [],
             "dependsOn": [
@@ -284,7 +302,7 @@
                 "command": "Move-Item",
                 "args": [
                     "-Path",
-                    "${workspaceFolder}/*.o",
+                    "C:/Users/HRY/0000_APPS/CodeBlocks/MinGW/bin/*.o",
                     "-Destination",
                     "${workspaceFolder}/obj/release",
                     "-Force"
@@ -294,33 +312,6 @@
             "dependsOn": [
                 "Compile Release"
             ]
-        },
-        // TEST
-        {
-            "type": "shell",
-            "label": "TEST",
-            "windows": {
-                "command": "echo",
-                "args": [
-                    "$(",
-                    "dir",
-                    "-Path",
-                    "${workspaceFolder}/",
-                    "-Filter",
-                    "*.o",
-                    "-Recurse",
-                    "|",
-                    "%{$_.FullName}",
-                    ")"
-                ]
-            }
-        },
-        {
-            "type": "shell",
-            "label": "TEST2",
-            "windows": {
-                "command": "if (Test-Path ./obj/debug){remove-item -path ./obj/debug/*.o} if (Test-Path ./obj/release){remove-item -path ./obj/release/*.o}"
-            }
         }
     ]
 }
